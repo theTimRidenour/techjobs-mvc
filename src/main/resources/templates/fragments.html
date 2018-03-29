@@ -27,5 +27,19 @@
         </div>
     </div>
 
+    <div th:fragment="search-results">
+    <div th:if="${jobs} and ${jobs.size()}">
+        <h3 th:text="${jobs.size() + ' Result(s)'}"></h3>
+        <table th:each="job : ${jobs}" class="job-listing">
+            <tr th:each="job_listing : ${job}">
+                <td th:if="${job_listing.key} eq 'name'" style="text-align: right; text-transform: capitalize" th:text="${job_listing.key}"></td>
+                <td th:unless="${job_listing.key} eq 'name'" style="text-align: right; text-transform: capitalize"><a th:href="@{/list/values(column=${job_listing.key})}" th:text="${job_listing.key}"></a></td>
+                <td><a th:href="@{/search/results(searchType=${job_listing.key},searchTerm=${job_listing.value})}" th:text="${job_listing.value}"></a></td>
+            </tr>
+        </table>
+    </div>
+    <h3 th:unless="${jobs} and ${jobs.size()}">No Results.</h3>
+    </div>
+
 </body>
 </html>
