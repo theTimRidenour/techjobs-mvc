@@ -13,7 +13,20 @@
     <form th:action="@{/search/results}">
         <h2>Search by:</h2>
 
-        <p>
+        <p th:if="${radio}">
+            <span th:each="column : ${columns}">
+                <input
+                        type="radio"
+                        name="searchType"
+                        th:id="${column.key}"
+                        th:value="${column.key}"
+                        th:checked="${column.key == radio}"/>
+                <label th:for="${column.key}" th:text="${column.value}"></label>
+            </span>
+
+        </p>
+
+        <p th:unless="${radio}">
             <span th:each="column : ${columns}">
                 <input
                         type="radio"

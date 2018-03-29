@@ -35,6 +35,7 @@ public class SearchController {
         }
         
         model.addAttribute("columns", ListController.columnChoices);
+        model.addAttribute("radio", searchType);
         model.addAttribute("jobs", jobsResult);
         return "search";
 
